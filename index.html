@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention aux QR Codes</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: red;
+      font-family: 'Courier New', Courier, monospace;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10vh 5vw;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 6vw; /* ✅ Taille relative à l'écran */
+      animation: glitch 1s infinite;
+    }
+
+    p {
+      font-size: 4vw;
+      margin-top: 2em;
+    }
+
+    .warning {
+      color: background: red;
+      padding: 1em;
+      margin-top: 3em;
+      display: inline-block;
+      font-weight: bold;
+      border: 3px solid white;
+      animation: pulse 2s infinite;
+      font-size: 4vw;
+    }
+
+    img {
+      display: block;
+      margin: 2em auto;
+      max-width: 90%;
+      height: auto;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px red; }
+      20% { text-shadow: -2px -2px lime; }
+      40% { text-shadow: 2px -2px blue; }
+      60% { text-shadow: -2px 2px yellow; }
+      80% { text-shadow: 2px 2px cyan; }
+      100% { text-shadow: -2px -2px magenta; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* ✅ Adaptation mobile */
+    @media (max-width: 600px) {
+      h1, p, .warning {
+        font-size: 5vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div class="container">
+    <h1>⚠️ Ne scannez pas n'importe quoi ⚠️</h1>
+    <p>Un simple QR code peut voler vos données, installer un virus ou vous piéger.</p>
+    <div class="warning">Réfléchissez avant de scanner.</div>
+    <img src="affiche qrcode FR.png" alt="Affiche de sensibilisation QR code"
+     style="display: block; margin-left: auto; margin-right: auto; margin-top: 2em; max-width: 80%; height: auto;">
+
+  </div>
+
+  <script>
+    // Effet de fond "bruit numérique"
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function drawNoise() {
+      const imageData = ctx.createImageData(canvas.width, canvas.height);
+      for (let i = 0; i < imageData.data.length; i += 4) {
+        const shade = Math.random() * 255;
+        imageData.data[i] = shade;
+        imageData.data[i + 1] = shade;
+        imageData.data[i + 2] = shade;
+        imageData.data[i + 3] = 20;
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    setInterval(drawNoise, 50);
+  </script>
+</body>
+</html>
