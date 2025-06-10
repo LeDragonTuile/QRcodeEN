@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention aux QR Codes</title>
+  <title>Watch out for QR Codes</title>
   <style>
     html, body {
       margin: 0;
@@ -15,20 +14,24 @@
       height: 100%;
       overflow-y: auto;
     }
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
       padding: 10vh 5vw;
       text-align: center;
     }
+
     h1 {
       font-size: 6vw; /* ✅ Taille relative à l'écran */
       animation: glitch 1s infinite;
     }
+
     p {
       font-size: 4vw;
       margin-top: 2em;
     }
+
     .warning {
       color: background: red;
       padding: 1em;
@@ -39,12 +42,14 @@
       animation: pulse 2s infinite;
       font-size: 4vw;
     }
+
     img {
       display: block;
       margin: 2em auto;
       max-width: 90%;
       height: auto;
     }
+
     @keyframes glitch {
       0% { text-shadow: 2px 2px red; }
       20% { text-shadow: -2px -2px lime; }
@@ -53,32 +58,26 @@
       80% { text-shadow: 2px 2px cyan; }
       100% { text-shadow: -2px -2px magenta; }
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
+
     canvas {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
     }
+
     /* ✅ Adaptation mobile */
     @media (max-width: 600px) {
       h1, p, .warning {
         font-size: 5vw;
       }
     }
-    
-    game {
-        margin: 100px auto 0 auto;
-        border: 2px solid #00ff00;
-        padding: 20px;
-        border-radius: 10px;
-        display: inline-block;
-    }
-
   </style>
 </head>
 <body>
@@ -87,44 +86,11 @@
     
     <img src="affiche qrcode EN.png" alt="Affiche de sensibilisation QR code"
      style="display: block; margin-left: auto; margin-right: auto; margin-top: 2em; max-width: 80%; height: auto;">
-    <h1>⚠️ Think before you scan. ⚠️</h1>
-    <div class="warning">A simple QR code can steal your data, install a virus, or trick you.</div>
+    <h1>⚠️ Ask yourself questions before scanning ⚠️</h1>
+    <div class="warning"> A simple QR code can steal your data, install a virus, or trick you. </div>
    
+
   </div>
-  
-<div id="game">
-  <h2>🔥 Mini-jeu de Clic 🔥</h2>
-  <p>Cliquez autant que possible en 10 secondes !</p>
-  <button id="clickButton" onclick="clickCounter()">Cliquez-moi !</button>
-  <p>Score : <span id="score">0</span></p>
-  <p id="message"></p>
-</div>
-
-<script>
-  let score = 0;
-  let timeLeft = 10;
-  let gameStarted = false;
-
-  function clickCounter() {
-    if (!gameStarted) {
-      gameStarted = true;
-      startTimer();
-    }
-    score++;
-    document.getElementById("score").innerText = score;
-  }
-
-  function startTimer() {
-    let timer = setInterval(function() {
-      timeLeft--;
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        document.getElementById("message").innerText = "⏱️ Temps écoulé ! Votre score est de " + score + ".";
-        document.getElementById("clickButton").disabled = true;
-      }
-    }, 1000);
-  }
-</script>
 
   <script>
     // Effet de fond "bruit numérique"
@@ -132,6 +98,7 @@
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     function drawNoise() {
       const imageData = ctx.createImageData(canvas.width, canvas.height);
       for (let i = 0; i < imageData.data.length; i += 4) {
@@ -143,6 +110,7 @@
       }
       ctx.putImageData(imageData, 0, 0);
     }
+
     setInterval(drawNoise, 50);
   </script>
 </body>
